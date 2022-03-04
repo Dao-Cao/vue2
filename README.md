@@ -1,4 +1,4 @@
-# vue2
+# demo
 
 ## Project setup
 ```
@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+必要なコンポーネント
+npm install less less-loader@5
+
+npm install vue-router@3
