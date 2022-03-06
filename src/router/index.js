@@ -10,6 +10,7 @@ import Register from '@/pages/Register'
 
 let originPush = VueRouter.prototype.push;
 let originReplace = VueRouter.prototype.replace;
+
 VueRouter.prototype.push = function(location,resolve,reject){
     if(resolve && reject){
         originPush.call(this,location,resolve,reject);

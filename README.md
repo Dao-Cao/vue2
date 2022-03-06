@@ -27,3 +27,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 npm install less less-loader@5
 
 npm install vue-router@3
+
+npm install vuex@3
