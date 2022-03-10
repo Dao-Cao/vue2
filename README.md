@@ -29,3 +29,9 @@ npm install less less-loader@5
 npm install vue-router@3
 
 npm install vuex@3
+
+npm install nprogress 
+
+npm install mockjs
+
+npm install swiper@5

@@ -65,15 +65,12 @@ export default {
             //テンプレート　リテラル template literals
             //this.$router.push(`/search/${this.keyword}?key=${this.keyword.toUpperCase()}`)
             //対象
-            const ret = this.$router.push({
-               name:"search",
-              //  params:{keyword:this.keyword},
-              params:{keyword:''|| undefined}, //空字符串的解决
-               query:{key:this.keyword.toUpperCase()}
-            },()=>{},(error)=>{
-              console.log(error)
-            })
-            console.log(ret);
+            let localtion = {name:'search',};
+            if (this.$route.query) {
+              localtion.query = this.$route.query;
+            }
+            localtion.params= {keyword:this.keyword.toUpperCase()|| undefined}
+            this.$router.push(localtion)
         }
     }
 };

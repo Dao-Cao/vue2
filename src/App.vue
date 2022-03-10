@@ -15,6 +15,10 @@ export default {
   components: {
     Header,
     Footer
+  },
+  mounted(){
+    //性能优化
+    this.$store.dispatch("categoryList");
   }
 }
 </script>
