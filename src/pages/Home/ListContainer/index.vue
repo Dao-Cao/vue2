@@ -3,32 +3,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
-          <div class="swiper-wrapper">
-            <div
-              class="swiper-slide"
-              v-for="(carouse) in bannerList"
-              :key="carouse.id"
-            >
-              <img :src="carouse.imgUrl" />
-            </div>
-            <!-- <div class="swiper-slide">
-                            <img src="./images/banner2.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner3.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="./images/banner4.jpg" />
-                        </div> -->
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <Carsouel :list="bannerList"/>
       </div>
       <div class="right">
         <div class="news">
@@ -105,7 +80,6 @@
 
 <script>
 import { mapState } from "vuex";
-import Swiper from "swiper";
 export default {
   mounted() {
     this.$store.dispatch("getListBanner");
@@ -119,37 +93,6 @@ export default {
     ...mapState({
       bannerList: state=> state.home.bannerList,
     }),
-  },
-  watch: {
-    bannerList: {
-      //immediate:true,
-      //deep:true,
-      handler(newValue, oldValue) {
-        this.$nextTick(() => {
-          new Swiper("#mySwiper", {
-            //direction: "vertical", // 垂直切换选项
-            loop: true, // 循环模式选项
-
-            // 如果需要分页器
-            pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-            },
-
-            // 如果需要前进后退按钮
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-
-            // 如果需要滚动条
-            scrollbar: {
-              el: ".swiper-scrollbar",
-            },
-          });
-        });
-      },
-    },
   },
   updated() {},
 };

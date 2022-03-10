@@ -92,7 +92,7 @@ export default {
     //alert(123);
     //console.log(123);
     //this.$store.dispatch("categoryList");
-    if (this.$route.path == "/search") {
+    if (this.$route.path.indexOf("/search") > -1) {
       this.show = false;
     }
   },
@@ -108,12 +108,12 @@ export default {
     }, 50),
     leaveShow() {
       this.currentIndex = -1;
-      if (this.$route.path == "/search") {
+      if (this.$route.path.indexOf("/search") > -1) {
         this.show = false;
       }
     },
     enterShow() {
-      if (this.$route.path == "/search") {
+      if (this.$route.path.indexOf("/search") > -1) {
         this.show = true;
       }
     },

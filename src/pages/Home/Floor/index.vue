@@ -26,44 +26,28 @@
               </ul>
               <img :src="list.imgUrl" />
             </div>
-            <div class="floorBanner">
-              <div class="swiper-container" id="floor1Swiper" ref="cur">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide"
-                    v-for="carouse in list.carouselList"
-                    :key="carouse.id"
-                  >
-                    <img :src="carouse.imgUrl" />
-                  </div>
-                </div>
-                <!-- 如果需要分页器 -->
-                <div class="swiper-pagination"></div>
-
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
+            <div class="floorBanner">carouselList
+              <Carsouel :list=list.carouselList />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-2.png" />
+                <img :src="list.recommendList[0]" />
               </div>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-3.png" />
+                <img :src="list.recommendList[1]" />
               </div>
             </div>
             <div class="split center">
-              <img src="./images/floor-1-4.png" />
+              <img :src="list.bigImg" />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-5.png" />
+                <img :src="list.recommendList[2]" />
               </div>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-6.png" />
+                <img :src="list.recommendList[3]" />
               </div>
             </div>
           </div>
@@ -74,33 +58,33 @@
 </template>
 
 <script>
-import Swiper from "swiper";
 export default {
   props: ["list"],
   mounted() {
     //this.$store.dispatch('getFloor');
-    new Swiper(this.$refs.cur, {
-      //direction: "vertical", // 垂直切换选项
-      loop: true, // 循环模式选项
+    // new Swiper(this.$refs.cur, {
+    //   //direction: "vertical", // 垂直切换选项
+    //   loop: true, // 循环模式选项
 
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
+    //   // 如果需要分页器
+    //   pagination: {
+    //     el: ".swiper-pagination",
+    //     clickable: true,
+    //   },
 
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
+    //   // 如果需要前进后退按钮
+    //   navigation: {
+    //     nextEl: ".swiper-button-next",
+    //     prevEl: ".swiper-button-prev",
+    //   },
 
-      // 如果需要滚动条
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-    });
+    //   // 如果需要滚动条
+    //   scrollbar: {
+    //     el: ".swiper-scrollbar",
+    //   },
+    // });
   },
+
 };
 </script>
 
