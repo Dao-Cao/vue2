@@ -11,15 +11,16 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x">手机</li>
-            <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li>
+            <li class="with-x" v-if="searchParams.categoryName" @click="removeCategoryName">{{searchParams.categoryName}}</li>
+             <li class="with-x" v-if="searchParams.keyword" @click="removeKeyword">{{searchParams.keyword}}</li>
+            <li class="with-x" v-if="searchParams.trademark" @click="removeTrademark">{{searchParams.trademark.split(':')[1]}}</li>
+
+            <li class="with-x" v-for="(prop,index) in searchParams.props" :key="index" @click="removeProp(index)">{{prop.split(':')[1]}}</li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo"/>
 
         <!--details-->
         <div class="details clearfix">
@@ -138,11 +139,11 @@
           "category1Id": "",
           "category2Id": "",
           "category3Id": "",
-          "categoryName": "手机",
+          "categoryName": "",
           "keyword": "",
           "order": "",
           "pageNo": 1,
-          "pageSize": 3,
+          "pageSize": 10,
           "props": [],
           "trademark": ""
         }
@@ -164,12 +165,68 @@
       this.getData();
     },
     methods:{
+      trademarkInfo(trademark){
+          console.log(trademark);
+          this.searchParams.trademark = trademark
+          this.getData();
+          // if (this.$route.params) {
+          //   this.$router.push({name:"search",params:this.$route.params})
+          // }
+      },
+      attrInfo(attr){
+          //console.log(attr)
+          if (this.searchParams.props.indexOf(attr) == -1) {
+            this.searchParams.props.push(attr);
+          }
+          
+          this.getData();
+      },
       getData(){
         this.$store.dispatch('getSearchList',this.searchParams);
+      },
+      removeCategoryName(){
+        this.searchParams.category1Id = undefined;
+        this.searchParams.category2Id = undefined;
+        this.searchParams.category3Id = undefined;
+        this.searchParams.categoryName = undefined;
+        this.getData();
+        if (this.$route.params) {
+          this.$router.push({name:"search",params:this.$route.params})
+        }
+      },
+      removeKeyword(){
+        this.searchParams.keyword = undefined;
+        this.getData();
+        if (this.$route.query) {
+          this.$router.push({name:"search",query:this.$route.query})
+        }
+        this.$bus.$emit("removeKeyword","aaaa")
+      },
+      removeTrademark(){
+        this.searchParams.trademark = undefined;
+        this.getData();
+        // if (this.$route.query) {
+        //   this.$router.push({name:"search",query:this.$route.query})
+        // }
+        // this.$bus.$emit("removeKeyword","aaaa")
+      },
+      removeProp(index){
+        this.searchParams.props.splice(index,1);
+        this.getData();
       }
+
     },
     computed:{
       ...mapGetters(['getGoodsList'])
+    },
+    watch:{
+      $route(newVal,oldVal){
+        this.searchParams.category1Id = undefined;
+        this.searchParams.category2Id = undefined;
+        this.searchParams.category3Id = undefined;
+        Object.assign(this.searchParams,this.$route.query,this.$route.params)
+        this.getData();
+      }
     }
   }
 </script>

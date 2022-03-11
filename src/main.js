@@ -23,5 +23,8 @@ new Vue({
   store,
   mounted(){
     //this.$store.dispatch("categoryList");
+  },
+  beforeCreate(){
+    Vue.prototype.$bus = this
   }
 }).$mount('#app')

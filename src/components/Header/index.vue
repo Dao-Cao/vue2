@@ -58,6 +58,12 @@ export default {
         keyword:''
       }
     },
+    mounted(){
+      this.$bus.$on('removeKeyword',(data)=>{
+				console.log('head组件，收到了数据',data);
+        this.keyword = "";
+			})
+    },
     methods:{
         goSearch(){
             //文字列
@@ -71,7 +77,11 @@ export default {
             }
             localtion.params= {keyword:this.keyword.toUpperCase()|| undefined}
             this.$router.push(localtion)
-        }
+        },
+        
+    },
+    beforDestory(){
+      this.$bus.$off('removeKeyword')
     }
 };
 </script>

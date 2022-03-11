@@ -4,7 +4,7 @@
       <div class="fl key brand">品牌</div>
       <div class="value logos">
         <ul class="logo-list">
-          <li v-for="(trademark) in getTrademarkList" :key="trademark.tmId">{{trademark.tmName}}</li>
+          <li v-for="(trademark) in getTrademarkList" :key="trademark.tmId" @click="trademarkHander(trademark)">{{trademark.tmName}}</li>
         </ul>
       </div>
       <div class="ext">
@@ -16,8 +16,8 @@
       <div class="fl key">{{attr.attrName}}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(valu,index) in attr.attrValueList" :key="index">
-            <a>{{valu}}</a>
+          <li v-for="(attrValue,index) in attr.attrValueList" :key="index" @click="sendAttrInfo(attr,attrValue)">
+            <a  >{{attrValue}}</a>
           </li>
         </ul>
       </div>
@@ -30,8 +30,22 @@
  import {mapGetters} from 'vuex'
   export default {
     name: 'SearchSelector',
+    props:['trademarkInfo','attrInfo'],
     computed:{
       ...mapGetters(['getAttrsList','getTrademarkList'])
+    },
+    methods:{
+      trademarkHander(trademark){
+        //console.log(params);
+        let temp =  `${trademark.tmId}:${trademark.tmName}`
+        this.$emit('trademarkInfo',temp)
+      },
+      sendAttrInfo(attr,attrValue){
+        console.log(attrValue,attrValue);
+        let temp =  `${attr.attrId}:${attrValue}:${attr.attrName}`
+        alert(123)
+        this.$emit('attrInfo',temp)
+      }
     }
   }
 </script>
